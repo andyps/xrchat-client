@@ -235,9 +235,9 @@ function SignInWrapper(props: any) {
     }
   }
   else {
-    const smsTab    = isEnableSmsMagicLink    && <Tab icon={<EmailIcon/>} label="SMS"/>
+    const smsTab    = isEnableSmsMagicLink    && <Tab icon={<PhoneIcon/>} label="SMS"/>
     const smsTabPanel = isEnableSmsMagicLink  && <TabPanel value={tabIndex} index={0}><MagicLinkSms {...props}/></TabPanel>
-    const emailTab  = isEnableEmailMagicLink  && <Tab icon={<PhoneIcon/>} label="Email"/>
+    const emailTab  = isEnableEmailMagicLink  && <Tab icon={<EmailIcon/>} label="Email"/>
     const emailTabPanel  = isEnableEmailMagicLink  && <TabPanel value={tabIndex} index={1}><MagicLinkEmail {...props}/></TabPanel>
     const userTab   = isEnableUserPassword    && <Tab icon={<UserIcon/>} label="User"/>
     const userTabPanel   = isEnableUserPassword && <TabPanel value={tabIndex} index={2}><SignIn {...props}/></TabPanel>

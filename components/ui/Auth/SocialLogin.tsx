@@ -55,8 +55,13 @@ class SocialLogin extends React.Component<Props> {
     const githubButton = isEnableGithub ? 
       (
         <Grid item xs={12}>
-          <Button onClick={(e) => this.handleGithubLogin(e)}>
-            <GitHubIcon fontSize="large"/>
+          <Button 
+            onClick={(e) => this.handleGithubLogin(e)} 
+            startIcon={<GitHubIcon/>}
+            variant="contained"
+            className="github"
+            fullWidth={true}
+          >
             Login with GitHub
           </Button>
         </Grid>
@@ -64,8 +69,13 @@ class SocialLogin extends React.Component<Props> {
     const googleButton = isEnableGoogle ? 
         (
           <Grid item xs={12}>
-            <Button onClick={(e) => this.handleGoogleLogin(e)}>
-              <GoogleIcon/>
+            <Button 
+              onClick={(e) => this.handleGoogleLogin(e)}
+              startIcon={<GoogleIcon/>}
+              variant="contained"
+              className="google"
+              fullWidth={true}
+            >
               Login with Google
             </Button>
           </Grid>
@@ -73,8 +83,13 @@ class SocialLogin extends React.Component<Props> {
     const facebookButton = isEnableFacebook ? 
       (
         <Grid item xs={12}>
-          <Button onClick={(e) => this.handleFacebookLogin(e)}>
-            <FacebookIcon fontSize="large"/>
+          <Button 
+            onClick={(e) => this.handleFacebookLogin(e)}
+            startIcon={<FacebookIcon/>}
+            variant="contained"
+            className="facebook"
+            fullWidth={true}
+          >
             Login with Facebook
           </Button>
         </Grid>
@@ -82,11 +97,13 @@ class SocialLogin extends React.Component<Props> {
 
     return (
         <Container component="main" maxWidth="xs">
-          <Grid container justify="center" spacing={2}>
-            {githubButton}
-            {facebookButton}
-            {googleButton}
-          </Grid>
+          <div className="paper">
+            <Grid container justify="center" spacing={2}>
+              {githubButton}
+              {facebookButton}
+              {googleButton}
+            </Grid>
+          </div>
         </Container>
     );
   }
