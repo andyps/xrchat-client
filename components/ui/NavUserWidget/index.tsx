@@ -1,8 +1,8 @@
-import Link from '@material-ui/core/Typography'
-import NextLink from 'next/link'
+// import Link from '@material-ui/core/Typography'
+// import NextLink from 'next/link'
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
-
+import Login from '../Auth/Login'
 import './style.scss'
 
 import { logoutUser } from '../../../redux/auth/service'
@@ -32,9 +32,19 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 })
 
 class NavUserBadge extends Component<Props> {
+  state = {
+    open: false
+  }
+
   handleLogout() {
     console.log('logout')
     this.props.logoutUser()
+  }
+
+  modalHandle = () => {
+    this.setState({
+      open: !this.state.open
+    })
   }
 
   render() {
@@ -63,15 +73,17 @@ class NavUserBadge extends Component<Props> {
           </div>
         )}
         {!isLoggedIn && (
-          <Button>
-            <NextLink href="/auth/login">
-              <Link className="loginText" title="Login">
-                Login
-              </Link>
-            </NextLink>
-          </Button>
-        )
-        }
+          <>
+            <Button onClick={() => this.modalHandle}>
+              {/* <NextLink href="/auth/login">
+              <Link className="loginText" title="Login"> */}
+              Login
+              {/* </Link>
+            </NextLink> */}
+            </Button>
+            <Login open={this.state.open} onClose={() => this.modalHandle()} />
+          </>
+        )}
       </div>
     )
   }

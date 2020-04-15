@@ -9,9 +9,11 @@ import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import GoogleIcon from '../../assets/GoogleIcon'
+import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import {
@@ -36,6 +38,8 @@ interface Props {
   loginUserByGoogle: typeof loginUserByGoogle
   loginUserByFacebook: typeof loginUserByFacebook
   createMagicLink: typeof createMagicLink
+  open: boolean
+  onClose: Function
 }
 
 const mapStateToProps = (state: any) => {
@@ -51,6 +55,19 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   loginUserByFacebook: bindActionCreators(loginUserByFacebook, dispatch),
   createMagicLink: bindActionCreators(createMagicLink, dispatch)
 })
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary
+    }
+  })
+)
 
 class SignIn extends React.Component<Props> {
   state = {
@@ -88,6 +105,8 @@ class SignIn extends React.Component<Props> {
   }
 
   render() {
+    const classes = useStyles()
+    console.log(this.props.open,"oepn")
     return (
       <EmptyLayout>
         <Container component="main" maxWidth="xs">
@@ -193,10 +212,11 @@ function SignInWrapper(props: any) {
   console.log('-------', config)
   const isEnableEmailMagicLink = config ? config.isEnableEmailMagicLink : true
   if (isEnableEmailMagicLink) {
-    return <MagicLinkEmail {...props}></MagicLinkEmail>
+    return 
+    <Modal open={props.open} onClose={() => props.onClose}> <MagicLinkEmail {...props}></MagicLinkEmail></Modal>
   }
 
-  return <SignIn {...props} />
+  return <Modal open={props.open} onClose={() => props.onClose}><SignIn {...props} /></Modal>
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInWrapper)
